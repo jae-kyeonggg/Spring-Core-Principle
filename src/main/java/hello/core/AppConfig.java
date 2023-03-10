@@ -8,7 +8,7 @@ import hello.core.order.OrderService;
 import hello.core.order.OrderServiceImpl;
 
 public class AppConfig {
-    private static MemoryMemberRepository memberRepository() {
+    private static MemoryMemberRepository memberRepository() {  //중복 제거
         return new MemoryMemberRepository();
     }
 
