@@ -8,11 +8,20 @@ import hello.core.order.OrderService;
 import hello.core.order.OrderServiceImpl;
 
 public class AppConfig {
-    public MemberService memberService() {
-        return new MemberServiceImpl(new MemoryMemberRepository());
+    private static MemoryMemberRepository memberRepository() {
+        return new MemoryMemberRepository();
     }
 
+    private static FixDiscountPolicy discountPolicy() {
+        return new FixDiscountPolicy();
+    }
+    
+    public MemberService memberService() {
+        return new MemberServiceImpl(memberRepository());
+    }
+
+
     public OrderService orderService() {
-        return new OrderServiceImpl(new MemoryMemberRepository(), new FixDiscountPolicy()); //구현 객체 생성
+        return new OrderServiceImpl(memberRepository(), discountPolicy()); //구현 객체 생성
     }
 }
