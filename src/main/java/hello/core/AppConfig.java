@@ -1,6 +1,7 @@
 package hello.core;
 
 import hello.core.discount.FixDiscountPolicy;
+import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.MemberService;
 import hello.core.member.MemberServiceImpl;
 import hello.core.member.MemoryMemberRepository;
@@ -12,14 +13,13 @@ public class AppConfig {
         return new MemoryMemberRepository();
     }
 
-    private static FixDiscountPolicy discountPolicy() {
-        return new FixDiscountPolicy();
+    private static RateDiscountPolicy discountPolicy() {
+        return new RateDiscountPolicy();
     }
     
     public MemberService memberService() {
         return new MemberServiceImpl(memberRepository());
     }
-
 
     public OrderService orderService() {
         return new OrderServiceImpl(memberRepository(), discountPolicy()); //구현 객체 생성
